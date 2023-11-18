@@ -128,12 +128,16 @@ The following classification models were used for training and on each of these 
     
 \end{itemize}
 
-Other than these classification models, 2 clustering models were used to check how good they are compared to the classification models if no labels are there. The models were:
+Other than these classification models, 4 clustering models were used to check how good they are compared to the classification models if no labels are there, for all the models the number of clusters were set to 2. The models were:
 
 \begin{itemize}
-    \item \textbf{K-Means}: K-Means is an unsupervised machine learning algorithm used for clustering. It partitions the input data into k clusters by iteratively assigning each data point to the cluster whose centroid is closest and updating the centroids based on the mean of the points in each cluster. Here, the number of clusters were fixed to 2
+    \item \textbf{K-Means}: K-Means is an unsupervised machine learning algorithm used for clustering. It partitions the input data into k clusters by iteratively assigning each data point to the cluster whose centroid is closest and updating the centroids based on the mean of the points in each cluster.
 
-    \item \textbf{Agglomerative Clustering:} Agglomerative Clustering is an unsupervised machine learning algorithm used for hierarchical clustering. It starts with each data point as a singleton cluster and iteratively merges the closest pairs of clusters until only one cluster remains. The linkage criterion (e.g., ward, complete, average) determines how the distance between clusters is calculated during merging. Here, the number of clusters were fixed to 2
+    \item \textbf{Agglomerative Clustering:} Agglomerative Clustering is an unsupervised machine learning algorithm used for hierarchical clustering. It starts with each data point as a singleton cluster and iteratively merges the closest pairs of clusters until only one cluster remains. The linkage criterion (e.g., ward, complete, average) determines how the distance between clusters is calculated during merging.
+    
+    \item \textbf{BIRCH:} BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) is an unsupervised machine learning algorithm for hierarchical clustering. It is designed for large datasets and incrementally builds a tree structure to represent the clusters. BIRCH is memory-efficient and suitable for streaming data, making it well-suited for scenarios with high-dimensional datasets.
+
+    \item  \textbf{Spectral Clustering:} Spectral Clustering is an unsupervised machine learning algorithm used for clustering. It works by transforming the data into a spectral domain, where clusters are identified based on the eigenvalues of the similarity matrix. Spectral clustering can be particularly effective for datasets with complex structures or non-convex shapes.
 
 \end{itemize}
 
@@ -147,29 +151,33 @@ After hyper-parameter tuning, the final accuracy and f1-score of the models are 
         \hline
         \textbf{Model} & \textbf{Accuracy} & \textbf{f1-score}\\
         \hline
-        Baseline Classifier & 0.64 & 0.78 \\
+        Baseline Classifier & 0.64 & 0.79 \\
         \hline
-        Decision Tree Classifier & 0.96 & 0.95 \\
+        Decision Tree Classifier & 0.96 & 0.94 \\
         \hline
-        SVM Classifier & 0.99 & 0.98 \\
+        SVM Classifier & 0.94 & 0.91 \\
         \hline
-        KNN Classifier & 0.90 & 0.85 \\
+        KNN Classifier & 0.88 & 0.80 \\
         \hline
-        Logistic Regression & 0.99 & 0.98 \\
+        Logistic Regression & 0.94 & 0.91 \\
         \hline
-        Random Forest Classifier & 0.86 & 0.77 \\
+        Random Forest Classifier & 0.92 & 0.89 \\
         \hline
-        Bagging Classifier & 0.97 & 0.96 \\
+        Bagging Classifier & 0.95 & 0.93 \\
         \hline
-        Voting Classifier(Hard) & 0.96 & 0.94 \\
+        Voting Classifier(Hard) & 0.94 & 0.91 \\
         \hline
-        Voting Classifier(Soft) & 0.98 & 0.97 \\
+        Voting Classifier(Soft) & 0.93 & 0.90 \\
         \hline
-        Stacking Classifier & 0.99 & 0.98 \\
+        Stacking Classifier & 0.94 & 0.91 \\
         \hline
-        K-Means Cluster & 0.91 & 0.93 \\
+        K-Means Cluster & 0.90 & 0.92 \\
         \hline
-        Agglomerative cluster & 0.88 & 0.90 \\
+        Agglomerative cluster & 0.63 & 0.01 \\
+        \hline
+        BIRCH Cluster & 0.84 & 0.88 \\
+        \hline
+        Spectral Cluster & 0.63 & 0.01 \\
         \hline
     \end{tabular}
     \caption{Different Models and their accuracy and f1-score}
@@ -195,12 +203,10 @@ After hyper-parameter tuning, the final accuracy and f1-score of the models are 
 \section{Conclusion}
 
 
-After a thorough analysis and comparison of various models, it has been determined that Stacking demonstrates the highest effectiveness among the considered options. However, upon running the models with different seeds, slight variations in accuracy and F1 score were observed for both Voting and Stacking classifiers. Consequently, the next preferable choices are SVM and Logistic Regression, and \textbf{Logistic Regression} model was chosen.
+After a thorough analysis and comparison of various models, it has been determined that \textbf{Decision Tree} Model had the best accuracy and f1-score among the models used. Hence this is selected as the final model.
 
-The decision to favor Logistic Regression over SVM is grounded in practical considerations. SVMs, while effective, can demand more computational resources during training, particularly for datasets lacking clear separability. On the contrary, Logistic Regression proves to be more scalable, especially with larger datasets, offering a computationally efficient alternative.
+This is a practical selection as the data is not balanced and Decision Trees excel with imbalanced datasets, they adeptly model non-linear boundaries without being influenced by class distribution. Their flexibility in handling diverse data patterns, insensitivity to skewed class proportions, interpretability, and natural treatment of missing values make them a fitting choice.
 
 Additionally, noteworthy insights emerged regarding the performance of clustering algorithms. Although not surpassing the efficacy of classification algorithms, clustering demonstrated decent results. Despite limited exploration in this area, it is acknowledged that clustering algorithms could serve as viable options in scenarios where labeled training data is scarce or unavailable.
-
-Additionally, noteworthy insights emerged regarding the performance of clustering algorithms. Although not surpassing the efficacy of classification algorithms, clustering demonstrated decent results. Despite limited exploration in this area, it is acknowledged that clustering algorithms could serve as viable options in scenarios where labeled training data is scarce or unavailable.  
 
 \end{document}
